@@ -16,13 +16,6 @@ const usuariosRegistrados = [];
 //7 mujeres y 4 hombres
 // https://randomuser.me/api/?results=10
 
-//const numeros = [1, 2, 3, 4, 5, 6];
-// const usuariosPorGenero = _.partition(usuariosRegistrados, (usuario) => usuario.gender == male)
-
-// console.log("Arreglo final: ", arregloFinal);
-// console.log("Arreglo final[0]: ", arregloFinal[0]);
-// console.log("Arreglo final[1]: ", arregloFinal[1]);
-
 app.use(express.json());
 
 // Ruta para obtener datos de Random User API
@@ -43,23 +36,11 @@ app.get('/randomuser', async (req, res) => {
       const usuarioCreado = `Nombre: ${user.name.first} - Apellido: ${user.name.last} - ID: ${uuidv4().slice(0, 6)} - Timestamp: ${fechaRegistro}\n`;
       usuariosRegistrados.push(usuarioCreado);
     });
-    // const usuariosHombre = _.partition(usuariosRegistrados, (usuario) => usuario.gender == 'male');
-    // const usuariosMujer = _.partition(usuariosRegistrados, (usuario) => usuario.gender == 'female');
-    // console.log(
-    //   `
-    //   Mujeres:
-
-    //   ${usuariosMujer.join('')}
-
-    //   Hombres:
-
-    //   ${usuariosHombre.join('')}
-
-    //   `
-    //   );
     
     console.log(chalk.blue.bgWhite.bold(usuariosRegistrados.join('')));
-    // console.log('users:', usuariosRegistrados);
+    const usuariosPorGenero = _.partition(userData, (usuario) => usuario.gender == 'male');
+    console.log(usuariosPorGenero);
+    
     // conversion a Json, devuelve un objeto con un usuario
     res.json(userData);
   } catch (error) {
